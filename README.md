@@ -43,62 +43,94 @@ candidate_kit/
 ├── openapi.yaml
 ├── requirements.txt
 └── sample_seed.py
+```
 
-Setup
+##Setup
+
 Create a virtual environment:
+```text
 python -m venv .venv
+```
 
 Activate it on Windows:
+```text
 .venv\Scripts\Activate.ps1
+```
 
 Install the dependencies:
+```text
 python -m pip install -r requirements.txt
+```
 
 Make sure MongoDB is running and configure the required MongoDB connection settings.
 Load the sample data:
+```text
 python sample_seed.py
+```
 
 Start the API:
+```text
 uvicorn app.main:app --port 8000
+```
 
 For development with automatic reload:
+```text
 uvicorn app.main:app --port 8000 --reload
+```
 
-API Documentation
+##API Documentation
+
 After starting the server, open:
 http://127.0.0.1:8000/docs
 
 The OpenAPI contract is available in:
+```text
 openapi.yaml
+```
 
-Testing
+##Testing
 Run the automated tests:
+```text
 python -m pytest -v
+```
 
 Local test result:
+```text
 9 passed
+```
 
-Main API Areas
-Attendance
+##Main API Areas
+
+###Attendance
+
 - Create employee
 - Punch in
 - Punch out
 - List attendance records
 - Regularize attendance
-Analytics
+  
+###Analytics
+
 - Employee monthly attendance
 - Department summary
 - Late-coming leaderboard
 - Department attendance trend
-Admin
+  
+###Admin
+
 - Attendance query explanation using MongoDB explain
-Database
+  
+##Database
+
 The application uses MongoDB to store employee and attendance information.
 Attendance records are uniquely identified by:
+```text
 emp_code + date
-
+```
 Attendance regularization maintains a history of changes for auditability.
-Testing Summary
+
+##Testing Summary
+
 The project was tested using pytest. All 9 implemented API tests passed successfully.
 The tests cover:
 - Root endpoint
@@ -110,6 +142,8 @@ The tests cover:
 - Late leaderboard
 - Department trend
 - Admin attendance explain endpoint
-Repository
+  
+##Repository
+
 GitHub:
 https://github.com/Nasrin-Code/HROne_Attendance_API
