@@ -1,26 +1,115 @@
-# Candidate kit
+# HROne Attendance API
 
-Read in this order:
+A FastAPI-based Employee Attendance and Analytics API using MongoDB.
 
-1. `PROBLEM_STATEMENT.docx`: what you are asked to do, how it is evaluated.
-2. `openapi.yaml`: the API contract and the business rules (R1 - R10).
-3. `DATA_MODEL.md`: what is stored in MongoDB, with nine sample documents.
-4. `app/main.py`: the starter. Put **all** your code in this one file. It must start with `uvicorn app.main:app --port 8000`.
-5. `REVIEW.md`, `DECISIONS.md`: templates to fill in.
+## Features
 
-`sample_data/` holds the nine sample documents as MongoDB Extended JSON; `sample_seed.py` loads them. The grader's dataset is
-much larger and contains cases they do not show.
+- Employee management
+- Punch-in and punch-out
+- Attendance listing with filters and pagination
+- Attendance regularization with history
+- Monthly employee attendance analytics
+- Department attendance summary
+- Late-coming leaderboard
+- Department attendance trend
+- MongoDB query explain endpoint
+- Automated API tests using pytest
 
-## Local setup
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env            # set MONGO_URI / MONGO_DB (local docker: docker run -p 27017:27017 mongo:7)
+## Tech Stack
+
+- Python
+- FastAPI
+- MongoDB
+- PyMongo
+- Pydantic
+- Pytest
+- Uvicorn
+
+## Project Structure
+
+```text
+candidate_kit/
+├── app/
+│   ├── __init__.py
+│   └── main.py
+├── sample_data/
+│   ├── attendance_logs.json
+│   └── employees.json
+├── tests/
+│   └── test_main.py
+├── DATA_MODEL.md
+├── DECISIONS.md
+├── REVIEW.md
+├── openapi.yaml
+├── requirements.txt
+└── sample_seed.py
+
+Setup
+Create a virtual environment:
+python -m venv .venv
+
+Activate it on Windows:
+.venv\Scripts\Activate.ps1
+
+Install the dependencies:
+python -m pip install -r requirements.txt
+
+Make sure MongoDB is running and configure the required MongoDB connection settings.
+Load the sample data:
 python sample_seed.py
-uvicorn app.main:app --port 8000 --reload
-```
-MongoDB **6.0 or newer** is required (the grader uses 7.0). MongoDB Atlas free tier (M0) works.
 
-## Submit
-A public Git repository with `app/main.py`, `requirements.txt`, `REVIEW.md`, `DECISIONS.md` and a short `README.md`.
-No `.env`, no secrets, no Dockerfile.
+Start the API:
+uvicorn app.main:app --port 8000
+
+For development with automatic reload:
+uvicorn app.main:app --port 8000 --reload
+
+API Documentation
+After starting the server, open:
+http://127.0.0.1:8000/docs
+
+The OpenAPI contract is available in:
+openapi.yaml
+
+Testing
+Run the automated tests:
+python -m pytest -v
+
+Local test result:
+9 passed
+
+Main API Areas
+Attendance
+- Create employee
+- Punch in
+- Punch out
+- List attendance records
+- Regularize attendance
+Analytics
+- Employee monthly attendance
+- Department summary
+- Late-coming leaderboard
+- Department attendance trend
+Admin
+- Attendance query explanation using MongoDB explain
+Database
+The application uses MongoDB to store employee and attendance information.
+Attendance records are uniquely identified by:
+emp_code + date
+
+Attendance regularization maintains a history of changes for auditability.
+Testing Summary
+The project was tested using pytest. All 9 implemented API tests passed successfully.
+The tests cover:
+- Root endpoint
+- Employee creation
+- Punch-in
+- Attendance listing
+- Employee monthly analytics
+- Department summary
+- Late leaderboard
+- Department trend
+- Admin attendance explain endpoint
+Repository
+GitHub:
+https://github.com/Nasrin-Code/HROne_Attendance_API
